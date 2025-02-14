@@ -66,9 +66,18 @@ function updateStatus() {
   currentTypeIndex = (currentTypeIndex + 1) % statusTypes.length;
 }
 
+function heartbeat() {
+  setInterval(() => {
+    console.log('\x1b[35m[ HEARTBEAT ]\x1b[0m', `Bot is alive at ${new Date().toLocaleTimeString()}`);
+  }, 300000);
+}
+
+
 client.once('ready', () => {
   console.log('\x1b[36m[ INFO ]\x1b[0m', `\x1b[34mPing: ${client.ws.ping} ms \x1b[0m`);
   updateStatus()
+setInterval(updateStatus, 300000);
+heartbeat();
 });
 
 login();
